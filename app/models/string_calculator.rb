@@ -24,6 +24,17 @@ class StringCalculator
       custom_delimiter, numbers = numbers.split("\n", 2)
       delimiter = Regexp.new(Regexp.escape(custom_delimiter[2..]))
     end
-    numbers.split(delimiter).map(&:to_i).sum
+    # numbers.split(delimiter).map(&:to_i).sum
+    numbers_list = numbers.split(delimiter).map(&:to_i)
+    validate_negatives_nos(numbers_list)
+    numbers_list.sum
+  end
+
+  private
+
+  def validate_negatives_nos(numbers_list)
+    negatives = numbers_list.select { |num| num < 0 }
+    return if negatives.empty?
+    raise "negative numbers not allowed: #{negatives.join(', ')}"
   end
 end
