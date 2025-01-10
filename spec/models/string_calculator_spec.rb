@@ -33,5 +33,17 @@ RSpec.describe StringCalculator, type: :model do
                 expect(calculator.add('1,5')).to eq(6)
             end
         end
+
+        context 'when the input contains multiple numbers' do
+            it 'returns the sum of all numbers' do
+              expect(calculator.add('1,2,3,4')).to eq(10)
+            end
+        end
+
+        context 'when the input contains new lines as delimiters' do
+            it 'returns the sum of numbers' do
+              expect(calculator.add("1\n2,3")).to eq(6)
+            end
+        end
     end
 end
