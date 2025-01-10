@@ -45,5 +45,19 @@ RSpec.describe StringCalculator, type: :model do
               expect(calculator.add("1\n2,3")).to eq(6)
             end
         end
+
+        context 'when the input containe a custom delimiter' do
+            it 'supports different delimiters' do
+              expect(calculator.add("//;\n1;2")).to eq(3)
+            end
+
+            it 'supports another different delimiter' do
+              expect(calculator.add("//\n1,2;3")).to eq(6)
+            end
+
+            it "supports another type different delimiter" do
+                expect(calculator.add("//|\n1|2|3")).to eq(6)
+            end
+        end
     end
 end
